@@ -1,0 +1,35 @@
+/* Map and it's instances styles are managed here. */
+
+.ol-map {
+  height: 100%;
+  border-radius: 0.8rem;
+}
+
+.ol-layer canvas {
+  border-radius: 0.8rem;
+}
+
+.ol-control {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  padding: 0.6rem;
+  margin: 1rem;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 0.4rem;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(1px);
+}
+
+.ol-control button {
+  font-size: 2rem;
+  border: unset;
+  border-radius: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  margin-bottom: 0.5rem;
+  background: rgba(39, 79, 131, 0.2);
+}
+
+.ol-control button:active {
+  color: white;
+}
