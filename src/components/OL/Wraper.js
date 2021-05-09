@@ -9,7 +9,9 @@ import ZoomControl from "./Controls/ZoomControl";
 import { fromLonLat } from "ol/proj";
 import osm from "./osm";
 
-export default function MapWraper() {
+import Search from "../Search/Search";
+
+export default function Wraper() {
   const [zoom, setZoom] = useState(5);
   const [center, setCenter] = useState([-90, 40]);
 
@@ -21,6 +23,7 @@ export default function MapWraper() {
       <Controls>
         <ZoomControl />
       </Controls>
+      <Search />
     </Map>
   );
 }
