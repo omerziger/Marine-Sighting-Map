@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: flex-end;
   flex-direction: column;
+  z-index: 9;
   padding: 1.4rem;
   bottom: 1.6rem;
   width: calc(100% - 3.2rem);
