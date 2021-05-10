@@ -1,5 +1,6 @@
-import Axios from "axios";
 import { useEffect, useState } from "react";
+
+import Axios from "axios";
 
 const useSearch = ({ specie, limit, submit }) => {
   const [response, setResponse] = useState(null);
@@ -18,7 +19,7 @@ const useSearch = ({ specie, limit, submit }) => {
       });
     };
     fetchData();
-  }, [limit, specie, response, submit]);
+  }, [limit, specie, submit]);
 
   return { response, isLoading };
 };
