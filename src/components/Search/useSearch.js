@@ -12,7 +12,7 @@ const useSearch = ({ specie, limit, submit }) => {
 
     const fetchData = async () => {
       setIsLoading(true);
-      const url = `http://hotline.whalemuseum.org/api.json?limit=${limit}&species=${specie}`;
+      const url = `https://hotline.whalemuseum.org/api.json?limit=${limit}&species=${specie}`;
       await Axios.get(url).then((res) => {
         setIsLoading(false);
         setResponse(res.data);
