@@ -6,14 +6,22 @@ import Layers from "./Layers/Layers";
 import TileLayer from "./Layers/TileLayer";
 import Controls from "./Controls/Controls";
 import ZoomControl from "./Controls/ZoomControl";
-import { fromLonLat } from "ol/proj";
-import osm from "./osm";
+import Overlays from "./Overlays/Overlays";
+import MarkersOverlay from "./Overlays/MarkersOverlay";
 
 import Search from "../Search/Search";
 
+import { fromLonLat } from "ol/proj";
+import osm from "./osm";
+
 export default function Wraper() {
-  const [zoom, setZoom] = useState(5);
-  const [center, setCenter] = useState([-90, 40]);
+  const [zoom, setZoom] = useState(7);
+  const [center, setCenter] = useState([-123.7, 48.2]);
+  const [results, setResults] = useState(null);
+
+  const handleSearchResults = (data) => {
+    setResults(data);
+  };
 
   return (
     <Map zoom={zoom} center={fromLonLat(center)}>
@@ -23,7 +31,10 @@ export default function Wraper() {
       <Controls>
         <ZoomControl />
       </Controls>
-      <Search />
+      <Overlays>
+        <MarkersOverlay data={results} />
+        <Search response={handleSearchResults} />
+      </Overlays>
     </Map>
   );
 }

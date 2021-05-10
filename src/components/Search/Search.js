@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
 import "./search.css";
 
-// useSearch is a hook that calls "The Whale Museum API" with the parameters provided.
+// useSearch is a hook that calls "The Whale Museum" API with the UI parameters.
 import useSearch from "./useSearch";
 
-export default function Search() {
+export default function Search(props) {
   const [limit, setLimit] = useState(50);
   const [specie, setSpecie] = useState(null);
   const [submit, setSubmit] = useState(false);
   const { response, isLoading } = useSearch({ limit, specie, submit });
+  const specieSelectRef = useRef();
 
   const handleSelectChange = (e) => {
     setSpecie(e.target.value);
@@ -21,18 +21,20 @@ export default function Search() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
-    if (!specie) return console.log("must select specie");
+    if (!specie) {
+      specieSelectRef.current.style.border = "1px solid #4D90FE";
+      return;
+    }
     setSubmit(true);
   };
 
-  // Listen for API responses.
+  // Listen's to API responses, disables the submit and passes the data to wraper.
   useEffect(() => {
     if (!response) return;
-    if (isLoading) return;
+    specieSelectRef.current.style.border = "unset";
     setSubmit(false);
-    // Overlay hook goes HERE.
-  }, [response, isLoading]);
+    props.response(response);
+  }, [response, props]);
 
   return (
     <div className="search-container">
@@ -42,7 +44,7 @@ export default function Search() {
       <form onSubmit={handleFormSubmit} className="inputs-container">
         <div className="specie-container">
           <label>Select specie:</label>
-          <select onChange={handleSelectChange}>
+          <select ref={specieSelectRef} onChange={handleSelectChange}>
             <option value={null}></option>
             <option value="orca">Orca</option>
             <option value="minke">Minke</option>
@@ -86,7 +88,7 @@ export default function Search() {
       </form>
       <span id="disclaimer">
         <strong>Disclaimer:</strong> I don't own this data. Data belongs to
-        <a target="_" href="https://whalemuseum.org">
+        <a target="_blank" rel="noreferrer" href="https://whalemuseum.org">
           The Whale Museum
         </a>
         .
